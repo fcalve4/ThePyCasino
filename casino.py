@@ -2,8 +2,6 @@ import random
 import chipcount
 import time
 
-
-
 #INITIALIZE function
 def __init__():
     print(
@@ -363,34 +361,41 @@ def slots(BALANCE=BALANCE, NAME=NAME):
 
 #Main function
 def main():
-    choice = input(
-        """
-         _______________________________________________________________
-        |      __  __         _          __  __                         |
-        |     |  \/  |  __ _ (_) _ __   |  \/  |  ___  _ __   _   _     |
-        |     | |\/| | / _` || || '_ \  | |\/| | / _ \| '_ \ | | | |    |
-        |     | |  | || (_| || || | | | | |  | ||  __/| | | || |_| |    |
-        |     |_|  |_| \__,_||_||_| |_| |_|  |_| \___||_| |_| \__,_|    |
-        |                                                               |
-        |                                                               |
-        |       |Roulette|         |Blackjack|          |Slots|         |
-        |_______________________________________________________________|
+    while True:
+        choice = input(
+            """
+             _______________________________________________________________
+            |      __  __         _          __  __                         |
+            |     |  \/  |  __ _ (_) _ __   |  \/  |  ___  _ __   _   _     |
+            |     | |\/| | / _` || || '_ \  | |\/| | / _ \| '_ \ | | | |    |
+            |     | |  | || (_| || || | | | | |  | ||  __/| | | || |_| |    |
+            |     |_|  |_| \__,_||_||_| |_| |_|  |_| \___||_| |_| \__,_|    |
+            |                                                               |
+            |                                                               |
+            |       |Roulette|         |Blackjack|          |Slots|         |
+            |_______________________________________________________________|
 
-                  Please input a game from the choices above, 
-                     or quit, to save your chips for later.\n"""
-
-        ).lower()
-    if choice.startswith('r'):
-        roulette(BALANCE, NAME)
-    elif choice.startswith('b'):
-        pass
-    elif choice.startswith('s'):
-        slots(BALANCE, NAME)
-    elif choice.startswith('q'):
-        time.sleep(0.5)
-        print("Come back soon!")
-        time.sleep(0.5)
-        quit()
+                       Please input a game from the choices above, 
+                        or Quit, to save your chips for later. You can
+                   also input Leaderboard to view the high rollers.\n"""
+            ).lower()
+        if choice.startswith('r'):
+            roulette(BALANCE, NAME)
+        elif choice.startswith('b'):
+            pass
+        elif choice.startswith('s'):
+            slots(BALANCE, NAME)
+        elif choice.startswith('q'):
+            time.sleep(0.5)
+            print("Come back soon!")
+            time.sleep(0.5)
+            quit()
+        elif choice.startswith('l'):
+            time.sleep(0.5)
+            chipcount.leaderboard()
+            time.sleep(0.5)
+        else:
+            invalid()
 
 
 #Run script

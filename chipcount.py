@@ -1,5 +1,6 @@
 import os
 import csv
+from operator import itemgetter
 
 main_path = os.getcwd()
 record_path = main_path + '\\record.csv'
@@ -54,5 +55,32 @@ def save_score(balance, name):
 
 
 
+def leaderboard():
 
+    with open(record_path, 'r') as file:
+        reader = csv.reader(file)
+        filedata = []
+        for row in reader:
+            lst = []
+            lst.append(int(row[0]))
+            lst.append(row[1])
+            filedata.append(lst)
+            
+        top10= sorted(filedata, key=itemgetter(0), reverse=True)
 
+    print(
+    """
+     _______________________________________________________________________
+    |                                                                       |
+    |      _                   _           _                         _      |
+    |     | |    ___  __ _  __| | ___ _ __| |__   ___   __ _ _ __ __| |     | 
+    |     | |   / _ \/ _` |/ _` |/ _ \ '__| '_ \ / _ \ / _` | '__/ _` |     |
+    |     | |__|  __/ (_| | (_| |  __/ |  | |_) | (_) | (_| | | | (_| |     |
+    |     |_____\___|\__,_|\__,_|\___|_|  |_.__/ \___/ \__,_|_|  \__,_|     |
+    |                                                                       |
+    |_______________________________________________________________________|
+    """
+    )
+    for i in top10:
+        print("{}: {} chips".format(i[1], str(i[0])).center(78))
+    x = input("\n                          (Press any key to continue)\n").center(64)
