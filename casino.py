@@ -42,8 +42,8 @@ def invalid():
 
 def cashout(balance, NAME):
     print("You have decided to cashout.".center(100))
-    print("You currently have {} chips. Are you sure you want to stop now? (Y/N)".format(balance).center(100))
     while True:
+        print("You currently have {} chips. Are you sure you want to stop now? (Y/N)".format(balance).center(100))
         y_n = input()
         if y_n.startswith('y') or y_n.startswith('Y'):
             print("Cashed out {} chips!".format(balance).center(100))
