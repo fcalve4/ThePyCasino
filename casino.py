@@ -4,22 +4,19 @@ import time
 
 #INITIALIZE function
 def __init__():
-    print(
-    """
-     ______________________________________________________________________________________________
-    |                                                                                              |
-    |        /$$           /$$$$$$                      /$$                              /$$       |
-    |      /$$$$$$        /$$__  $$                    |__/                            /$$$$$$     |
-    |     /$$__  $$      | $$  \__/  /$$$$$$   /$$$$$$$ /$$ /$$$$$$$   /$$$$$$        /$$__  $$    |
-    |    | $$  \__/      | $$       |____  $$ /$$_____/| $$| $$__  $$ /$$__  $$      | $$  \__/    |
-    |    |  $$$$$$       | $$        /$$$$$$$|  $$$$$$ | $$| $$  \ $$| $$  \ $$      |  $$$$$$     |
-    |     \____  $$      | $$    $$ /$$__  $$ \____  $$| $$| $$  | $$| $$  | $$       \____  $$    |
-    |     /$$  \ $$      |  $$$$$$/|  $$$$$$$ /$$$$$$$/| $$| $$  | $$|  $$$$$$/       /$$  \ $$    |
-    |    |  $$$$$$/       \______/  \_______/|_______/ |__/|__/  |__/ \______/       |  $$$$$$/    |
-    |     \_  $$_/                                                                    \_  $$_/     |
-    |       \__/                                                                        \__/       |
-    |______________________________________________________________________________________________|                                                                            
-    """)
+    print("______________________________________________________________________________________________".center(100))
+    print("|                                                                                              |".center(100))
+    print("|        /$$           /$$$$$$                      /$$                              /$$       |".center(100))
+    print("|      /$$$$$$        /$$__  $$                    |__/                            /$$$$$$     |".center(100))
+    print("|     /$$__  $$      | $$  \__/  /$$$$$$   /$$$$$$$ /$$ /$$$$$$$   /$$$$$$        /$$__  $$    |".center(100))
+    print("|    | $$  \__/      | $$       |____  $$ /$$_____/| $$| $$__  $$ /$$__  $$      | $$  \__/    |".center(100))
+    print("|    |  $$$$$$       | $$        /$$$$$$$|  $$$$$$ | $$| $$  \ $$| $$  \ $$      |  $$$$$$     |".center(100))
+    print("|     \____  $$      | $$    $$ /$$__  $$ \____  $$| $$| $$  | $$| $$  | $$       \____  $$    |".center(100))
+    print("|     /$$  \ $$      |  $$$$$$/|  $$$$$$$ /$$$$$$$/| $$| $$  | $$|  $$$$$$/       /$$  \ $$    |".center(100))
+    print("|    |  $$$$$$/       \______/  \_______/|_______/ |__/|__/  |__/ \______/       |  $$$$$$/    |".center(100))
+    print("|     \_  $$_/                                                                    \_  $$_/     |".center(100))
+    print("|       \__/                                                                        \__/       |".center(100))
+    print("|______________________________________________________________________________________________|".center(100))                                                                            
     time.sleep(0.5)
     player_name = str(input("Welcome to the Casino! What is your name?".center(100)+'\n').lower().capitalize())
     time.sleep(0.5)
@@ -105,19 +102,15 @@ def roulette(balance, NAME):
 
     #Main roulette loop
     while True:
-        print(
-        """
-                               ________________________________________
-                              |                                        |
-                              |     You have a couple options.         |
-                              |     Press 'w' to make a wager.         |
-                              |     Press 'o' to view the odds.        |
-                              |     Press 'x' to quit and cash out.    |
-                              |________________________________________|
-        """
-        )
+        print(" ________________________________________".center(100))       
+        print("|                                        |".center(100))
+        print("|     You have a couple options.         |".center(100))
+        print("|     Press 'w' to make a wager.         |".center(100))
+        print("|     Press 'o' to view the odds.        |".center(100))
+        print("|     Press 'q' to quit and cash out.    |".center(100))
+        print("|________________________________________|".center(100))
         ans = input().lower()
-        if ans == 'w':
+        if ans.startswith('w'):
             while True:
                 print("Please enter the amount you would like to wager.".center(100))
                 try: 
@@ -128,8 +121,8 @@ def roulette(balance, NAME):
                 if wager <= balance:
                     while True:
                         print("You have chosen to wager {} chips. Is this correct? (Y/N)".format(wager).center(100))
-                        y_n = input('\n'.center(100)).lower()
-                        if y_n == 'y':
+                        y_n = input().lower()
+                        if y_n.startswith('y'):
                             print("Time to choose the conditions of your wager.".center(100))
                             while True:
                                 print("Press 's' for Single Number".center(100))
@@ -139,7 +132,7 @@ def roulette(balance, NAME):
                                 print("Press 'o' for Odd".center(100))
                                 print("Press 'g' for Green".center(100))
                                 print("Press 'd' for Dozen".center(100))
-                                resp = input('\n'.center(100)).lower()
+                                resp = input().lower()
                                 if resp.startswith('s'):
                                     while True:
                                         print("Input a number between 0 and 36.".center(100))  
@@ -220,7 +213,7 @@ def roulette(balance, NAME):
                                 else:
                                     invalid()
                                 
-                        elif y_n == 'n':
+                        elif y_n.startswith('n'):
                             print("Alright, let's fix that.".center(100))
                             break
 
@@ -229,23 +222,21 @@ def roulette(balance, NAME):
                 elif wager > balance:
                     print("You don't have enough chips! Try placing a smaller wager.".center(100))
 
-        elif ans == 'o':
-            print(
-                """
-                 _______________________________________
-                |                                       |
-                |       Single Number pays 36 to 1      |
-                |        Red or Black pays 1 to 1       |
-                |        Even or Odd pays 1 to 1        |
-                |       Green or Zero pays 50 to 1      |
-                |   1st, 2nd, or 3rd Dozen pays 2 to 1  |
-                |                                       |
-                |     (Press any key to move on)        |
-                |_______________________________________|
-                """
-            )
+        elif ans.startswith('o'):
+
+            print("_______________________________________".center(100))           
+            print("|                                       |".center(100))
+            print("|       Single Number pays 36 to 1      |".center(100))
+            print("|        Red or Black pays 1 to 1       |".center(100))
+            print("|        Even or Odd pays 1 to 1        |".center(100))
+            print("|       Green or Zero pays 50 to 1      |".center(100))
+            print("|   1st, 2nd, or 3rd Dozen pays 2 to 1  |".center(100))
+            print("|                                       |".center(100))
+            print("|     (Press any key to move on)        |".center(100))
+            print("|_______________________________________|".center(100))
+
             x = input()
-        elif ans == 'x':
+        elif ans.startswith('q'):
             cashout(balance, NAME)
         else:
             invalid()
@@ -302,17 +293,13 @@ def slots(balance, NAME):
 
     
     while True:    
-        print(
-        """
-                               ________________________________________
-                              |                                        |
-                              |     You have a couple options.         |
-                              |     Press 'w' to make a wager.         |
-                              |     Press 'o' to view the odds.        |
-                              |     Press 'x' to quit and cash out.    |
-                              |________________________________________|
-        """
-        )
+        print(" ________________________________________".center(100))       
+        print("|                                        |".center(100))
+        print("|     You have a couple options.         |".center(100))
+        print("|     Press 'w' to make a wager.         |".center(100))
+        print("|     Press 'o' to view the odds.        |".center(100))
+        print("|     Press 'q' to quit and cash out.    |".center(100))
+        print("|________________________________________|".center(100))
         ans = input(''.center(100)).lower()
         if ans == 'w':
             while True:
@@ -325,8 +312,8 @@ def slots(balance, NAME):
                 if wager <= balance:
                     while True:
                         print("You have chosen to wager {} chips. Is this correct? (Y/N)".format(wager).center(100))
-                        y_n = input()
-                        if y_n == 'y':
+                        y_n = input().lower()
+                        if y_n.startswith('y'):
                             output = list(spin())
                             if output[0] == '[7]' and output[1] == '[7]' and output[2] == '[7]':
                                 winnings = wager*500
@@ -363,7 +350,7 @@ def slots(balance, NAME):
                             else:
                                 balance -= wager
                                 lose_mess()
-                        elif y_n == 'n':
+                        elif y_n.startswith('n'):
                             print("Alright, let's fix that.".center(100))
                             break
                         else:
@@ -373,25 +360,21 @@ def slots(balance, NAME):
                     print("You don't have enough chips! Try placing a smaller wager.".center(100))
                     
 
-        elif ans == 'o':
-            print(
-                """
-                 _______________________________________
-                |                                       |
-                |        Diamond 1x | Pays 2 to 1       |
-                |        Diamond 2x | Pays 10 to 1      |
-                |        Diamond 3x | Pays 50 to 1      |
-                |       Cherry  3x | Pays 100 to 1      |
-                |        |BAR|  1x | Pays 250 to 1      |
-                |         [7]   3x | Pays 500 to 1      |
-                |                                       |
-                |      (Press any key to move on)       |
-                |_______________________________________|
-                """
-            )
+        elif ans.startswith('o'):
+            print(" _______________________________________".center(100))                             
+            print("|                                       |".center(100))
+            print("|        Diamond 1x | Pays 2 to 1       |".center(100))
+            print("|        Diamond 2x | Pays 10 to 1      |".center(100))
+            print("|        Diamond 3x | Pays 50 to 1      |".center(100))
+            print("|       Cherry  3x | Pays 100 to 1      |".center(100))
+            print("|        |BAR|  1x | Pays 250 to 1      |".center(100))
+            print("|         [7]   3x | Pays 500 to 1      |".center(100))
+            print("|                                       |".center(100))
+            print("|      (Press any key to move on)       |".center(100))
+            print("|_______________________________________|".center(100))
             x = input()
 
-        elif ans == 'x':
+        elif ans.startswith('q'):
             cashout(balance, NAME)
         else:
             invalid()  
@@ -400,20 +383,18 @@ def slots(balance, NAME):
 
 #Main function
 def main():
-    print(
-        """
-                     _______________________________________________________________
-                    |      __  __         _          __  __                         |
-                    |     |  \/  |  __ _ (_) _ __   |  \/  |  ___  _ __   _   _     |
-                    |     | |\/| | / _` || || '_ \  | |\/| | / _ \| '_ \ | | | |    |
-                    |     | |  | || (_| || || | | | | |  | ||  __/| | | || |_| |    |
-                    |     |_|  |_| \__,_||_||_| |_| |_|  |_| \___||_| |_| \__,_|    |
-                    |                                                               |
-                    |                                                               |
-                    |       |Roulette|         |Blackjack|          |Slots|         |
-                    |_______________________________________________________________|
-        """
-        )
+
+    print("_______________________________________________________________".center(100))
+    print("|      __  __         _          __  __                         |".center(100))
+    print("|     |  \/  |  __ _ (_) _ __   |  \/  |  ___  _ __   _   _     |".center(100))
+    print("|     | |\/| | / _` || || '_ \  | |\/| | / _ \| '_ \ | | | |    |".center(100))
+    print("|     | |  | || (_| || || | | | | |  | ||  __/| | | || |_| |    |".center(100))
+    print("|     |_|  |_| \__,_||_||_| |_| |_|  |_| \___||_| |_| \__,_|    |".center(100))
+    print("|                                                               |".center(100))
+    print("|                                                               |".center(100))
+    print("|       |Roulette|         |Blackjack|          |Slots|         |".center(100))
+    print("|_______________________________________________________________|".center(100))
+
     while True:
         print("Please input a game from the choices above,".center(100))
         print("or Quit, to save your chips for later. You can".center(100))
