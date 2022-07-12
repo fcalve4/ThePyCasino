@@ -34,30 +34,30 @@ def __init__():
 
 
 def invalid():
-    print('\n' + "Invalid response, please try again.".center(100) + '\n')
+    print('\n'+"Invalid response, please try again.".center(100)+'\n')
     time.sleep(1)
 
-def cashout(balance, NAME):
+def cashout(balance, name):
     print("You have decided to cashout.".center(100))
     while True:
         print("You currently have {} chips. Are you sure you want to stop now? (Y/N)".format(balance).center(100))
         y_n = input()
         if y_n.startswith('y') or y_n.startswith('Y'):
             print("Cashed out {} chips!".format(balance).center(100))
-            chipcount.save_score(balance, NAME)
+            chipcount.save_score(balance, name)
             main()
         elif y_n.startswith('n') or y_n.startswith('N'):
             print("Yay! You decided to keep playing!".center(100))
             break
         else:
             invalid()
-    return balance, NAME
+    return balance, name
 
 
 
-def roulette(balance, NAME):
+def roulette(balance, name):
     print("Welcome to Roulette!".center(100))
-    dict = {0:'Green', 1:'Black', 2:'Red', 3:'Black', 4:'Red', 5:'Black', 6:'Red', 7:'Black', 8:'Red', 9:'Black', 10:'Red', 11:'Black', 12:'Red', 13:'Black', 14:'Red', 15:'Black', 16:'Red', 17:'Black', 18:'Red', 19:'Black', 20:'Red', 21:'Black', 22:'Red', 23:'Black', 24:'Red', 25:'Black', 26:'Red', 27:'Black', 28:'Red', 29:'Black', 30:'Red', 31:'Black', 32:'Red', 33:'Black', 34:'Red', 35:'Black', 36:'Red'}
+    wheel = {0:'Green', 1:'Black', 2:'Red', 3:'Black', 4:'Red', 5:'Black', 6:'Red', 7:'Black', 8:'Red', 9:'Black', 10:'Red', 11:'Black', 12:'Red', 13:'Black', 14:'Red', 15:'Black', 16:'Red', 17:'Black', 18:'Red', 19:'Black', 20:'Red', 21:'Black', 22:'Red', 23:'Black', 24:'Red', 25:'Black', 26:'Red', 27:'Black', 28:'Red', 29:'Black', 30:'Red', 31:'Black', 32:'Red', 33:'Black', 34:'Red', 35:'Black', 36:'Red'}
 
     def spin():
         print("-Spinning-".center(100))
@@ -66,7 +66,7 @@ def roulette(balance, NAME):
         time.sleep(0.5)
         print("-Spinning-".center(100))
         time.sleep(0.5)
-        roll = random.choice(list(dict.items()))
+        roll = random.choice(list(wheel.items()))
         return roll
 
 
@@ -80,7 +80,7 @@ def roulette(balance, NAME):
             if y_n.startswith('y') or y_n.startswith('Y'):
                 break
             elif y_n.startswith('n') or y_n.startswith('N'):
-                cashout(balance, NAME)
+                cashout(balance, name)
             else:
                 invalid()
 
@@ -95,7 +95,7 @@ def roulette(balance, NAME):
             if y_n.startswith('y') or y_n.startswith('Y'):
                 break
             elif y_n.startswith('n') or y_n.startswith('N'):
-                cashout(balance, NAME)
+                cashout(balance, name)
             else:
                 invalid()
         
@@ -128,11 +128,11 @@ def roulette(balance, NAME):
                                 print("Press 's' for Single Number".center(100))
                                 print("Press 'r' for Red".center(100))
                                 print("Press 'b' for Black".center(100))
-                                print("Press 'e' for Even".center(100))
-                                print("Press 'o' for Odd".center(100))
                                 print("Press 'g' for Green".center(100))
                                 print("Press 'd' for Dozen".center(100))
                                 resp = input().lower()
+
+                                #IF PLAYER CHOOSES SINGLE NUMBER
                                 if resp.startswith('s'):
                                     while True:
                                         print("Input a number between 0 and 36.".center(100))  
@@ -152,45 +152,41 @@ def roulette(balance, NAME):
                                         else:
                                             balance -= wager
                                             lose_mess()
+
+                                #IF PLAYER CHOOSES RED
                                 elif resp.startswith('r'):
-                                    print("Input 'red' or 'black'.".center(100))
-                                    choice = str(input()).lower()
                                     roll = spin()
-                                    if not choice.startswith('r') or not choice.startswith('b'):
-                                        invalid()
-                                        continue
-                                    elif choice.startswith('r') == roll[1][0].lower() or choice.startswith('b') == roll[1][0].lower():
+                                    if resp.startswith('r') == roll[1][0].lower():
                                         winnings = wager
                                         balance += winnings
                                         win_mess()
                                     else:
                                         balance -= (wager)
                                         lose_mess()
-                                elif resp == 'eo':
-                                    print("Input 'even' or 'odd'.".center(100))
-                                    choice = str(input()).lower()
+
+                                #IF PLAYER CHOOSES BLACK
+                                elif resp.startswith('b'):
                                     roll = spin()
-                                    if choice.startswith('e') and roll[0] % 2 == 0:
-                                        winnings = wager
-                                        balance += winnings
-                                        win_mess()
-                                    elif choice.startswith('o') and roll[0] % 2 == 1:
+                                    if resp.startswith('b') == roll[1][0].lower():
                                         winnings = wager
                                         balance += winnings
                                         win_mess()
                                     else:
-                                        balance -= wager
+                                        balance -= (wager)
                                         lose_mess()
+
+                                #IF PLAYER CHOOSES GREEN
                                 elif resp == 'g':
-                                    choice = resp.lower()
                                     roll = spin()
-                                    if choice.startswith('g') and roll[1] == 'g':
+                                    if resp.startswith('g') and roll[1] == 'g':
                                         winnings = wager*50
                                         balance += winnings
                                         win_mess()
                                     else:
                                         balance -= wager
                                         lose_mess()
+
+                                #IF PLAYER CHOOSES DOZEN
                                 elif resp == 'd':
                                     print("Input 'first', 'second', or 'third'.".center(100))
                                     choice = str(input()).lower()
@@ -210,6 +206,7 @@ def roulette(balance, NAME):
                                     else:
                                         balance -= wager
                                         lose_mess()
+                                       
                                 else:
                                     invalid()
                                 
@@ -237,12 +234,12 @@ def roulette(balance, NAME):
 
             x = input()
         elif ans.startswith('q'):
-            cashout(balance, NAME)
+            cashout(balance, name)
         else:
             invalid()
 
 
-def slots(balance, NAME):
+def slots(balance, name):
     print("Welcome to Slots!".center(100))
     bonanza = ["Diamond", "Cherry", "|BAR|", "[7]"]
 
@@ -270,7 +267,7 @@ def slots(balance, NAME):
             if y_n.startswith('y') or y_n.startswith('Y'):
                 break
             elif y_n.startswith('n') or y_n.startswith('N'):
-                cashout(balance, NAME)
+                cashout(balance, name)
             else:
                 invalid()
 
@@ -285,7 +282,7 @@ def slots(balance, NAME):
             if y_n.startswith('y') or y_n.startswith('Y'):
                 break
             elif y_n.startswith('n') or y_n.startswith('N'):
-                cashout(balance, NAME)
+                cashout(balance, name)
             else:
                 invalid()
         
@@ -323,28 +320,16 @@ def slots(balance, NAME):
                                 winnings = wager*250
                                 balance += winnings
                                 win_mess()
-                            elif output[0] == 'Cherry' and output[1] == 'Cherry' and output[2] == 'Cherry':
+                            elif output[0] == 'Diamond' and output[1] == 'Diamond' and output[2] == 'Diamond':
                                 winnings = wager*100
                                 balance += winnings
                                 win_mess()
-                            elif output[0] == 'Diamond' and output[1] == 'Diamond' and output[2] == 'Diamond':
+                            elif output[0] == 'Bell' and output[1] == 'Bell' and output[2] == 'Bell':
                                 winnings = wager*50
                                 balance += winnings
                                 win_mess()
-                            elif output[0] == 'Diamond' and output[1] == 'Diamond' and output[2] != 'Diamond':
+                            elif output[0] == 'Cherry' and output[1] == 'Cherry' and output[2] == 'Cherry':
                                 winnings = wager*10
-                                balance += winnings
-                                win_mess()
-                            elif output[0] == 'Diamond' and output[1] != 'Diamond' and output[2] == 'Diamond':
-                                winnings = wager*10
-                                balance += winnings
-                                win_mess()
-                            elif output[0] != 'Diamond' and output[1] == 'Diamond' and output[2] == 'Diamond':
-                                winnings = wager*10
-                                balance += winnings
-                                win_mess()
-                            elif 'Diamond' in output:   
-                                winnings = wager*2
                                 balance += winnings
                                 win_mess()
                             else:
@@ -363,19 +348,18 @@ def slots(balance, NAME):
         elif ans.startswith('o'):
             print(" _______________________________________".center(100))                             
             print("|                                       |".center(100))
-            print("|        Diamond 1x | Pays 2 to 1       |".center(100))
-            print("|        Diamond 2x | Pays 10 to 1      |".center(100))
-            print("|        Diamond 3x | Pays 50 to 1      |".center(100))
-            print("|       Cherry  3x | Pays 100 to 1      |".center(100))
-            print("|        |BAR|  1x | Pays 250 to 1      |".center(100))
-            print("|         [7]   3x | Pays 500 to 1      |".center(100))
+            print("|     Cherry   3x  | Pays 10 to 1       |".center(100))
+            print("|      Bell    3x  | Pays 50 to 1       |".center(100))
+            print("|     Diamond  3x  | Pays 100 to 1      |".center(100))
+            print("|      |BAR|   3x  | Pays 250 to 1      |".center(100))
+            print("|       [7]    3x  | Pays 500 to 1      |".center(100))
             print("|                                       |".center(100))
             print("|      (Press any key to move on)       |".center(100))
             print("|_______________________________________|".center(100))
             x = input()
 
         elif ans.startswith('q'):
-            cashout(balance, NAME)
+            cashout(balance, name)
         else:
             invalid()  
 
@@ -400,12 +384,12 @@ def main():
         print("or Quit, to save your chips for later. You can".center(100))
         choice = input("also input Leaderboard to view the high rollers.".center(100)+'\n').lower()
         if choice.startswith('r'):
-            roulette(balance, NAME)
+            roulette(balance, name)
         elif choice.startswith('b'):
             print("Coming Soon!")
             pass
         elif choice.startswith('s'):
-            slots(balance, NAME)
+            slots(balance, name)
         elif choice.startswith('q'):
             time.sleep(0.5)
             print("Come back soon!".center(100))
@@ -422,7 +406,7 @@ def main():
 #Run script
 if __name__ == "__main__":
     #Run init and save playername and chip balance
-    balance, NAME= __init__()
+    balance, name= __init__()
     main()
 
 
